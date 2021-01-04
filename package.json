@@ -14,6 +14,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.10",
+    "mongoose-friends": "^0.2.5",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0"
   },
