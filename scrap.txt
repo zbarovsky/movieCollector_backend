@@ -1,0 +1,23 @@
+example model creation
+=================================================================
+sequelize model:create --name encounter --attributes title:string
+sequelize db:migrate
+=================================================================
+
+rest of config.json file
+=================================================================
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+  =================================================================
