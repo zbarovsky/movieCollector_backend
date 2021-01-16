@@ -4,6 +4,37 @@ sequelize model:create --name encounter --attributes title:string
 sequelize db:migrate
 =================================================================
 
+
+relationship models
+=================================================================
+sequelize model:create --name pet --attributes name:string,species:string,description:text,userId:integer
+=================================================================
+
+ex of associations
+=================================================================
+1:M
+    static associate(models) {
+      // define association here
+      models.user.hasMany(models.pet)
+    }
+
+      static associate(models) {
+      // define association here
+      models.pet.belongsTo(models.user)
+    }
+
+ M:M
+  pet.associate = function(models) {
+   // associations can be defined here
+   models.pet.belongsTo(models.user);
+   models.pet.belongsToMany(models.toy, {through: "PetToy"})
+ };
+
+ toys.associate = function(models) {
+   models.toy.belongsToMany(models.pet, {through: "PetToy"})
+ };
+ =================================================================
+
 rest of config.json file
 =================================================================
   "test": {
