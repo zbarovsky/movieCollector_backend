@@ -4,6 +4,16 @@ sequelize model:create --name encounter --attributes title:string
 sequelize db:migrate
 =================================================================
 
+current models:
+=================================================================
+sequelize model:create --name user --attributes name:string,email:string,username:string,password:string,age:integer
+sequelize db:migrate
+
+sequelize model:create --name usersLists --attributes userId:integer,listId:integer
+sequelize db:migrate
+
+sequelize model:create --name list --attributes title:string,movie:string,movieId:string
+sequelize db:migrate
 
 relationship models
 =================================================================
@@ -52,3 +62,7 @@ rest of config.json file
     "dialect": "postgres"
   }
   =================================================================
+
+
+
+
