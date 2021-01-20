@@ -6,7 +6,7 @@ sequelize db:migrate
 
 current models:
 =================================================================
-sequelize model:create --name user --attributes name:string,email:string,username:string,password:string,age:integer
+sequelize model:create --name user --attributes name:string,username:string,email:string,username:string,password:string,age:integer
 sequelize db:migrate
 
 sequelize model:create --name usersLists --attributes userId:integer,listId:integer
