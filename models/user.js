@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // TODO: WRITE ASSOCIATIONS 1-M (one user has many lists)
       // define association here
+      models.user.hasMany(models.list)
     }
   };
   user.init({
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
         len: {
           args: [1,99],
-          msg: 'Username must be between 1 and 99 characters'
+          msg: 'Username must be between 1 and 99 characters and unique'
         }
       }
     },
