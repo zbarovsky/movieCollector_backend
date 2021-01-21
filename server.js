@@ -56,7 +56,7 @@ app.get('/', function(req, res){
 app.use('/auth', require('./routes/auth'));
 app.use('/users', require('./routes/users'));
 app.use('/lists', require('./routes/lists'));
-app.use('movies', require('./routes/movies'));
+app.use('/movies', require('./routes/movies'));
 
 
 app.listen(process.env.PORT || 3000, function() {
