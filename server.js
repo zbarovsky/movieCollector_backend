@@ -59,6 +59,6 @@ app.use('/lists', require('./routes/lists'));
 app.use('/movies', require('./routes/movies'));
 
 
-app.listen(process.env.PORT || 3000, function() {
+app.listen(process.env.PORT || 9000, function() {
     console.log('With my toes on port ${process.env.PORT}, its such a lovely view')
 })
