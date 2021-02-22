@@ -12,7 +12,7 @@ sequelize db:migrate
 sequelize model:create --name usersLists --attributes userId:integer,listId:integer
 sequelize db:migrate
 
-sequelize model:create --name list --attributes title:string,movie:string,movieId:string
+sequelize model:create --name list --attributes title:string,movie:string,movieId:string,userId:integer
 sequelize db:migrate
 
 relationship models

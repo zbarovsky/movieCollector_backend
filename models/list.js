@@ -15,15 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   list.init({
-    title: {
-      type: DataTypes.STRING
-    },
-    movie: {
-      type: DataTypes.STRING
-    },
-    movieId: {
-      type: DataTypes.STRING
-    }
+    title: DataTypes.STRING,
+    movie: DataTypes.STRING,
+    movieId: DataTypes.STRING,
+    userId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'list',
