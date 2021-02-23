@@ -1,4 +1,4 @@
-require('dotenv'),config();
+require('dotenv').config();
 const Express = require('express');
 const ejsLayouts = require('express-ejs-layouts');
 const helmet = require('helmet');
@@ -54,11 +54,11 @@ app.get('/', function(req, res){
 
 // Routes (Controllers)
 app.use('/auth', require('./routes/auth'));
-app.use('/users', require('./routes/users'));
-app.use('/lists', require('./routes/lists'));
-app.use('/movies', require('./routes/movies'));
+// app.use('/users', require('./routes/users'));
+// app.use('/lists', require('./routes/lists'));
+// app.use('/movies', require('./routes/movies'));
 
 
 app.listen(process.env.PORT || 9000, function() {
-    console.log('With my toes on port ${process.env.PORT}, its such a lovely view')
+    console.log(`With my toes on port ${process.env.PORT}, its such a lovely view`)
 })

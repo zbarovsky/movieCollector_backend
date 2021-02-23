@@ -1,72 +1,76 @@
 'use strict';
-const bcrypt = require(bcrypt);
+const bcrypt = require('bcrypt');
+//const {delete}  = require('../routes/auth');
 
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class user extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      models.user.hasMany(models.list)
-    }
-  };
-  user.init({
+module.exports = function(sequelize, DataTypes) {
+ const user = sequelize.define('user', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: {
           args: [1,99],
-          msg: 'Name must be between 1 and 99 characters'
+          // msg: 'Name must be between 1 and 99 characters'
         }
       }
     },
     email: {
       type: DataTypes.STRING,
-      validate: {
         unique: true,
         isEmail: {
           msg: 'Invalid email address'
         }
-      }
       
     },
     username: {
       type: DataTypes.STRING,
+      unique: true,
       validate: {
-        unique: true,
         len: {
           args: [1,99],
-          msg: 'Username must be between 1 and 99 characters and unique'
+          // msg: 'Username must be between 1 and 99 characters and unique'
         }
       }
     },
     password: {
       type: DataTypes.STRING,
-      validate: {
-        is: ["^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"],
-        msg: 'Password must be at least 8 characters, and have one number and one special character'
-      }
+      // validate: {
+      //is: ["^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"],
+      //   // msg: ['Password must be at least 8 characters, and have one number and one special character']
+      // }
     },
     age: {
       type: DataTypes.INTEGER,
       validate: {
         isNumeric: true,
-        msg: 'Please enter a number'
+        //msg: 'Please enter a number'
       }
     }
-  },
-  //  TODO: WRITE BCRYPT HOOK FOR HASH AND SALT PASSWORD
+  }, {
+      // BCRYPT HOOK FOR HASH AND SALT PASSWORD
+    hooks: {
+      beforeCreate: function(createdUser, options) {
+        if (createdUser && createdUser.password) {
+          let hash = bcrypt.hash(createdUser.password, 12);
+          createdUser.password = hash
+        }
+      }
+    }
+  })
 
-  {
-    sequelize,
-    modelName: 'user',
-  });
+  user.associate = function(models) {
+    models.user.hasMany(models.list)
+  }
+
+  user.prototype.validPassword = function(passwordTyped) {
+    return bcrypt.compareSync(passwordTyped, this.password)
+  }
+
+  user.prototype.toJSON = function() {
+    let userData = this.get();
+    delete userData.password;
+    return userData
+  }
+
   return user;
 };

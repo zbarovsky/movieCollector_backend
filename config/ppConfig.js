@@ -16,7 +16,7 @@ passport.deserializeUser(function(id, callback) {
 })
 
 // config local variables/settings
-passport.new(new LocalStrategy ({
+passport.use(new LocalStrategy ({
     usernameField: 'email',
     passwordField: 'password'
 }, function(email, password, callback) {
